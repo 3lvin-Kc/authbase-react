@@ -1,0 +1,29 @@
+{
+  "name": "authbase-react",
+  "version": "0.1.0",
+  "description": "Deterministic authentication state machine for React",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "react",
+    "authentication",
+    "auth",
+    "state-machine"
+  ],
+  "peerDependencies": {
+    "react": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.27",
+    "react": "^17.0.0 || ^18.0.0",
+    "typescript": "^5.9.3"
+  },
+  "files": [
+    "dist"
+  ],
+  "license": "MIT"
+}
