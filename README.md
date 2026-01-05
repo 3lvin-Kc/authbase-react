@@ -1,4 +1,4 @@
-# authbase-react
+# authbase-react : This is an early project. The goal is correctness first, adoption later.
 
 A dead simple auth state manager for React. No magic, no suprises.
 
