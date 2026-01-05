@@ -273,7 +273,6 @@ We don't have fancy loading states or retry logic because your app probably need
 
 Found a bug? Open an issue. Want to add something? Check out CONTRIBUTING.md for the full contribution guide.
 
-./CONTRIBUTION.md
 
 ## License
 
