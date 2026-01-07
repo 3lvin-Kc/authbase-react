@@ -1,6 +1,6 @@
 # authbase-react : This is an early project. The goal is correctness first, adoption later.
 
-A dead simple auth state manager for React. No magic, no suprises.
+A dead simple auth state manager for React. No magic, no suprises. This library is intentionally small. Many teams may prefer to inline similar logic instead of adding a dependency — this project exists to make that logic explicit and correct.
 
 ## What is this?
 
@@ -268,6 +268,20 @@ We don't have fancy loading states or retry logic because your app probably need
 - You need SSR/Next.js support (maybe later)
 
 - You want something that "just works" with zero config (this needs backend work, sorry)
+
+## Sec - notes : 
+
+authbase-react does not attempt to provide the most secure possible browser auth model.
+
+Storing access and refresh tokens in JavaScript-accessible storage (localStorage / sessionStorage) is vulnerable to XSS. For high-security apps, prefer:
+
+httpOnly cookie-based refresh tokens
+
+backend-managed sessions
+
+This library is best suited for apps where those trade-offs are acceptable.
+
+
 
 ## Contributing
 
