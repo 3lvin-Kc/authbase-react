@@ -19,6 +19,7 @@ I got tired of copy-pasting this code around, so I made a library. Maybe you'll 
 - Manages login/logout state
 - Stores tokens in localStorage (or wherever you want)
 - Gives you hooks to check if someone's logged in
+- Provides optional UI templates (LoginForm, LogoutButton, AuthGate)
 - Protects routes that need authentication
 - Handles token refresh when you tell it to
 
@@ -27,7 +28,6 @@ I got tired of copy-pasting this code around, so I made a library. Maybe you'll 
 - No OAuth flows (build that yourself)
 - No cookie auth (we use tokens)
 - No automatic background token refresh (you call refresh when needed)
-- No fancy UI components
 - No backend (you need to build your own API)
 
 ## Install
@@ -61,6 +61,31 @@ function App() {
 ```
 
 That's it. Now you can use the hooks anywhere. Pretty simple right?
+
+## Prebuilt UI templates
+
+If you want the boilerplate UI handled for you, the library ships with simple, optional UI components:
+
+```jsx
+import { AuthGate, LoginForm, LogoutButton } from 'authbase-react';
+
+function App() {
+  return (
+    <AuthProvider config={authConfig}>
+      <AuthGate>
+        <LogoutButton />
+        <YourApp />
+      </AuthGate>
+    </AuthProvider>
+  );
+}
+```
+
+- `AuthGate` protects everything inside it and shows a login form by default when unauthenticated.
+- `LoginForm` is a minimal sign-in form wired to `signIn`.
+- `LogoutButton` signs the user out with one click.
+
+These templates are styled with Tailwind (shadcn-ui inspired), so your app should already have Tailwind configured to see the intended design and animations.
 
 ## Make a login form
 
