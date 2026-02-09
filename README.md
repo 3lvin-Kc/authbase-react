@@ -201,6 +201,9 @@ Response: {
   user: object
 }
 ```
+Failure cases:
+- 401/403 for invalid credentials (will surface as an error in the auth state)
+- 4xx/5xx for API issues (will surface as an error in the auth state)
 
 **Refresh endpoint (optional):**
 ```
@@ -210,6 +213,9 @@ Response: {
   access_token: string
 }
 ```
+Failure cases:
+- 401/403 for expired/invalid refresh token (will transition to unauthenticated)
+- 4xx/5xx for API issues (will surface as an error in the auth state)
 
 **Logout endpoint (optional):**
 ```
@@ -217,6 +223,8 @@ POST /auth/logout
 Headers: Authorization: Bearer {access_token}
 Response: 204
 ```
+Failure cases:
+- 4xx/5xx errors are captured but local auth state still clears
 
 That's all we support right now. If your API looks different, this library won't work for you (yet). Sorry bout that.
 
@@ -250,6 +258,23 @@ const {
 **useUser()** - Just the user object
 
 **useIsAuthenticated()** - Just a boolean, yep
+
+## State machine overview
+
+Authbase-react is intentionally deterministic. These are the only possible states and transitions:
+
+**States**
+- `idle` → initial state before storage is checked
+- `loading` → a login/logout/refresh/init is in progress
+- `authenticated` → user + access token are present
+- `unauthenticated` → no valid session
+- `error` → an operation failed (error is stored in state)
+
+**Common transitions**
+- `idle` → `loading` → `authenticated | unauthenticated`
+- `unauthenticated` → `loading` → `authenticated` (login success)
+- `authenticated` → `loading` → `unauthenticated` (logout)
+- `authenticated` → `loading` → `authenticated | unauthenticated` (refresh)
 
 ## Philosophy
 
